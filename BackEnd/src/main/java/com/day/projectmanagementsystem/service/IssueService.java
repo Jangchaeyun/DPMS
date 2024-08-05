@@ -8,19 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IssueService {
-    Optional<Issue> getIssueById(Long userId) throws Exception;
+    Issue getIssueById(Long issueId) throws Exception;
 
     List<Issue> getIssueByProjectId(Long projectId) throws Exception;
 
-    Issue createIssue(IssueRequest issue, Long userId) throws Exception;
+    Issue createIssue(IssueRequest issueRequest, User user) throws Exception;
 
-    Optional<Issue> updateIssue(Long issueId, IssueRequest updatedIssue, Long userid) throws Exception;
-
-    String deleteIssue(Long issuedId, Long userid) throws Exception;
-
-    List<Issue> searchIssues(String title, String status, String priority, Long assignedId) throws Exception;
-
-    List<User> getAssignedUsers(Long issuedId) throws Exception;
+    void deleteIssue(Long issuedId, Long userid) throws Exception;
 
     Issue addUserToIssue(Long issueId, Long userId) throws Exception;
 
