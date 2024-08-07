@@ -91,7 +91,7 @@ public class ProjectController {
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
-    @GetMapping("/{projectId}")
+    @GetMapping("/{projectId}/chat")
     public ResponseEntity<Chat> getChatByProjectId(
             @PathVariable Long projectId,
             @RequestHeader("Authorization") String jwt

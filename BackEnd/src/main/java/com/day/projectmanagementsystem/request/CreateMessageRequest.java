@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-public class CreateCommentRequest {
-    private Long issueId;
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateMessageRequest {
+    private Long senderId;
     private String content;
+    private Long projectId;
 }
