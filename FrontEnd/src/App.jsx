@@ -1,10 +1,12 @@
 import "./App.css";
-import { Button } from "./components/ui/button";
+import Home from "./pages/Home/Home";
+import Navbar from "./pages/Navbar/Navbar";
 
 function App() {
   return (
     <>
-      <Button>안녕</Button>
+      <Navbar />
+      <Home />
     </>
   );
 }
