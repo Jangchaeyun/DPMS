@@ -11,7 +11,7 @@ import {
 import React, { useState } from "react";
 import ProjectCard from "../Project/ProjectCard";
 
-const tags = [
+export const tags = [
   "모두",
   "react",
   "nextjs",
@@ -61,15 +61,15 @@ const ProjectList = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <RadioGroupItem value="fullstack" id="r2" />
-                        <Label htmlFor="r2">풀스텍</Label>
+                        <Label htmlFor="r2">fullstack</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <RadioGroupItem value="frontend" id="r3" />
-                        <Label htmlFor="r3">프론트엔드</Label>
+                        <Label htmlFor="r3">frontend</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <RadioGroupItem value="backend" id="r4" />
-                        <Label htmlFor="r4">백엔드</Label>
+                        <Label htmlFor="r4">backend</Label>
                       </div>
                     </RadioGroup>
                   </div>
