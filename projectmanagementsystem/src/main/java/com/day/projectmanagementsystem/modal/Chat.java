@@ -1,5 +1,6 @@
 package com.day.projectmanagementsystem.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,6 +20,11 @@ public class Chat {
     @OneToOne
     private Project project;
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
+
+
+    @ManyToMany
+    private List<User> users = new ArrayList<>();
 }
