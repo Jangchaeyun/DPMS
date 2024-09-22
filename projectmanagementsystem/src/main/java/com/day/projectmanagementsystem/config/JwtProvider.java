@@ -25,8 +25,12 @@ public class JwtProvider {
     }
 
     public static String getEmailFromToken(String jwt) {
-        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-
-        return String.valueOf(claims.get("email"));
+        try {
+            jwt = jwt.substring(7); // "Bearer " 제거
+            Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+            return String.valueOf(claims.get("email"));
+        } catch (Exception e) {
+            throw new RuntimeException("JWT Token Parsing Failed: " + e.getMessage());
+        }
     }
 }

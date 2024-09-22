@@ -1,4 +1,4 @@
-﻿package com.day.projectmanagementsystem.controller;
+package com.day.projectmanagementsystem.controller;
 
 import com.day.projectmanagementsystem.DTO.IssueDTO;
 import com.day.projectmanagementsystem.modal.Issue;
@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/issues")
 public class IssueController {
-
     @Autowired
     private IssueService issueService;
 
@@ -24,19 +23,19 @@ public class IssueController {
     private UserService userService;
 
     @GetMapping("/{issueId}")
-    public ResponseEntity<Issue> getIssueById(@PathVariable Long issueId) throws Exception {
+    public ResponseEntity<Issue> getIssuesById(@PathVariable Long issueId) throws Exception {
         return ResponseEntity.ok(issueService.getIssueById(issueId));
     }
 
     @GetMapping("/project/{projectId}")
-    private ResponseEntity<List<Issue>> getIssueByProjectId(@PathVariable Long projectId) throws Exception {
+    public ResponseEntity<List<Issue>> getIssueByProjectId(@PathVariable Long projectId) throws Exception {
         return ResponseEntity.ok(issueService.getIssueByProjectId(projectId));
     }
 
     @PostMapping
     public ResponseEntity<IssueDTO> createIssue(@RequestBody IssueRequest issue,
-                                                @RequestHeader("Authorization") String token)
-            throws Exception {
+                                                @RequestHeader("Authorization") String token) throws Exception {
+        System.out.println("issue-----" + issue);
         User tokenUser = userService.findUserProfileByJwt(token);
         User user = userService.findUserById(tokenUser.getId());
 
@@ -70,8 +69,7 @@ public class IssueController {
 
     @PutMapping("/{issueId}/assignee/{userId}")
     public ResponseEntity<Issue> addUserToIssue(@PathVariable Long issueId,
-                                                @PathVariable Long userId)
-        throws Exception {
+                                                @PathVariable Long userId) throws Exception {
         Issue issue = issueService.addUserToIssue(issueId, userId);
 
         return ResponseEntity.ok(issue);

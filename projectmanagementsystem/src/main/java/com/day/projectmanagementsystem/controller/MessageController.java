@@ -3,7 +3,6 @@ package com.day.projectmanagementsystem.controller;
 import com.day.projectmanagementsystem.modal.Chat;
 import com.day.projectmanagementsystem.modal.Message;
 import com.day.projectmanagementsystem.modal.User;
-import com.day.projectmanagementsystem.request.CreateCommentRequest;
 import com.day.projectmanagementsystem.request.CreateMessageRequest;
 import com.day.projectmanagementsystem.service.MessageService;
 import com.day.projectmanagementsystem.service.ProjectService;
@@ -27,16 +26,11 @@ public class MessageController {
     private ProjectService projectService;
 
     @PostMapping("/send")
-    public ResponseEntity<Message> sendMessage(@RequestBody CreateMessageRequest request)
-        throws Exception {
+    public ResponseEntity<Message> sendMessage(@RequestBody CreateMessageRequest request) throws Exception {
         User user = userService.findUserById(request.getSenderId());
-        if (user == null) {
-            throw new Exception("user not found with id " + request.getSenderId());
-        }
+
         Chat chats = projectService.getProjectById(request.getProjectId()).getChat();
-        if (chats == null) {
-            throw new Exception("chat not found with id " + request.getProjectId());
-        }
+        if (chats == null) throw new Exception("Chats not found");
         Message sentMessage = messageService.sendMessage(request.getSenderId(),
                 request.getProjectId(), request.getContent());
         return ResponseEntity.ok(sentMessage);

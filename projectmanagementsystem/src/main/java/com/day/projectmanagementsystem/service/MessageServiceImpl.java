@@ -26,7 +26,7 @@ public class MessageServiceImpl implements MessageService{
     @Override
     public Message sendMessage(Long senderId, Long projectId, String content) throws Exception {
         User sender = userRepository.findById(senderId)
-                .orElseThrow(() -> new Exception("User not found with id: " + senderId));
+                .orElseThrow(() -> new Exception("User not found with id: " +senderId));
 
         Chat chat = projectService.getProjectById(projectId).getChat();
 
@@ -44,7 +44,8 @@ public class MessageServiceImpl implements MessageService{
     @Override
     public List<Message> getMessagesByProjectId(Long projectId) throws Exception {
         Chat chat = projectService.getChatByProjectId(projectId);
-        List<Message> findByChatIdOrderByCreatedAsc = messageRepository.findByChatIdOrderByCreatedAsc(chat.getId());
-        return findByChatIdOrderByCreatedAsc;
+        List<Message> findByChatIdOrderByCreatedAtAsc = messageRepository.findByChatIdOrderByCreatedAtAsc(chat.getId());
+
+        return findByChatIdOrderByCreatedAtAsc;
     }
 }
