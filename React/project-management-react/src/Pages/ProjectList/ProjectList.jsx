@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import ProjectCard from "../Project/ProjectCard";
 
 const tags = [
   "all",
@@ -109,10 +110,9 @@ const ProjectList = () => {
           <div>
             <div className="space-y-5 min-h-[74vh]">
               {keyword
-                ? [1, 1, 1].map((item) => <div key={item}>project card</div>)
-                : [1, 1, 1, 1].map((item) => (
-                    <div key={item}>project card</div>
-                  ))}
+                ? [1, 1, 1].map((item) => <ProjectCard key={item} />)
+                : [1, 1, 1, 1].map((item) => <ProjectCard key={item} />
+                  )}
             </div>
           </div>
         </section>
