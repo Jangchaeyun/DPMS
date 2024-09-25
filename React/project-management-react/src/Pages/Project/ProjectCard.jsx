@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -37,8 +38,8 @@ const ProjectCard = () => {
           </div>
           <p className="text-gray-500 text-sm">프로젝트 관리 시스템</p>
         </div>
-        <div>
-            
+        <div className="flex flex-wrap gap-2 items-center">
+            {[1, 1, 1, 1].map((item) => <Badge key={item} variant="outline">{"frontend"}</Badge>)}
         </div>
       </div>
     </Card>
