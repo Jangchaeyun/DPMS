@@ -19,7 +19,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { tags } from "../ProjectList/ProjectList";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import { Hand } from "lucide-react";
 
 const CreateProjectForm = () => {
   const handleTagsChange = (newValue) => {

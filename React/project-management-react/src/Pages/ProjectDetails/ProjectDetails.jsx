@@ -23,7 +23,7 @@ const ProjectDetails = () => {
               <h1 className="text-lg font-semibold pb-5">
                 Day Project Management System
               </h1>
-              <div className="space-y-5 pb-10">
+              <div className="space-y-5 pb-10 text-sm">
                 <p className="w-full md:max-w-lg lg:max-w-xl">
                   Day Project Management System
                 </p>
@@ -69,6 +69,10 @@ const ProjectDetails = () => {
                   <Badge>Band Aid</Badge>
                 </div>
               </div>
+              <section>
+                <p className="py-5 border-b text-lg -tracking-wider">할 일</p>
+                <div className="lg:flex md:flex gap-3 justify-between py-5"></div>
+              </section>
             </div>
           </ScrollArea>
         </div>
