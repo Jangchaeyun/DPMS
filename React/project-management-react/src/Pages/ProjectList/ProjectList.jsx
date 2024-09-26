@@ -46,7 +46,7 @@ const ProjectList = () => {
             <CardContent className="mt-5">
               <ScrollArea className="space-y-7 h-[70vh]">
                 <div>
-                  <h1 className="pb-3 text-gray-400 border-b">카테고리</h1>
+                  <h1 lassName="pb-3 text-gray-400 border-b">카테고리</h1>
                   <div className="pt-5">
                     <RadioGroup
                       defaultValue="all"
