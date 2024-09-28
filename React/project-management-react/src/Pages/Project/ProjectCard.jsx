@@ -19,7 +19,7 @@ const ProjectCard = () => {
           <div className="flex justify-between">
             <div className="flex items-center gap-5">
               <h1
-                onClick={() => navigate("/projects/1")}
+                onClick={() => navigate("/project/1")}
                 className="cursor-pointer font-bold text-lg"
               >
                 Day Project Management System
