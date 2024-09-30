@@ -11,10 +11,9 @@ import {
 } from "./ActionTypes";
 
 const initialState = {
-  messages: [],
+  comments: [],
   loading: false,
   error: null,
-  chat: null,
 };
 
 const commentReducer = (state = initialState, action) => {
@@ -55,7 +54,6 @@ const commentReducer = (state = initialState, action) => {
         loading: false,
         error: action.error,
       };
-
     default:
       return state;
   }
