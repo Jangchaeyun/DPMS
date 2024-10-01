@@ -15,13 +15,12 @@ public class JwtProvider {
     static SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
 
     public static String generateToken(Authentication auth) {
-        String jwt = Jwts.builder().setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + 8640000))
+
+        return Jwts.builder().setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().getTime() + 86400000))
                 .claim("email", auth.getName())
                 .signWith(key)
                 .compact();
-
-        return jwt;
     }
 
     public static String getEmailFromToken(String jwt) {

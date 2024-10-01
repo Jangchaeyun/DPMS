@@ -7,9 +7,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { login } from "@/Redux/Auth/Action";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const form = useForm({
     // resolver: zod
     defaultValues: {
@@ -19,6 +22,7 @@ const Login = () => {
   });
 
   const onSubmit = (data) => {
+    dispatch(login(data));
     console.log("invite email", data);
   };
 
