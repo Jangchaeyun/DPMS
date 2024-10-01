@@ -5,6 +5,7 @@ import projectReducer from "./Project/Reducer";
 import chatReducer from "./Chat/Reducer";
 import commentReducer from "./Comment/Reducer";
 import { issueReducer } from "./Issue/Reducer";
+import subscriptionReducer from "./Subscription/Reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ const rootReducer = combineReducers({
   chat: chatReducer,
   comment: commentReducer,
   issue: issueReducer,
+  subscription: subscriptionReducer,
 });
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
