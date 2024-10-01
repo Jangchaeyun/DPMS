@@ -51,7 +51,6 @@ public class ProjectController {
 
     @PostMapping
     public ResponseEntity<Project> createProject(
-            @PathVariable Long projectId,
             @RequestHeader("Authorization") String jwt,
             @RequestBody Project project
     ) throws Exception {

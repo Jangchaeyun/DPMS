@@ -42,11 +42,11 @@ export const searchProjects = (keyword) => async (dispatch) => {
   }
 };
 
-export const createProjects = (projectData) => async (dispatch) => {
+export const createProject = (projectData) => async (dispatch) => {
   dispatch({ type: CREATE_PROJECT_REQUEST });
   try {
     const { data } = await api.post("/api/projects", projectData);
-    console.log("create projects", data);
+    console.log("create projects ----- ", data);
     dispatch({ type: CREATE_PROJECT_SUCCESS, projects: data });
   } catch (error) {
     console.log(error);
@@ -69,7 +69,7 @@ export const deleteProject =
   async (dispatch) => {
     dispatch({ type: DELETE_PROJECT_REQUEST });
     try {
-      const { data } = await api.delete("/api/projects" + projectId);
+      const { data } = await api.delete("/api/projects/" + projectId);
       console.log("delete project", data);
       dispatch({ type: DELETE_PROJECT_SUCCESS, projectId });
     } catch (error) {

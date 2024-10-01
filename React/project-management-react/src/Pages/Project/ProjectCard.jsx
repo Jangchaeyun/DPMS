@@ -7,11 +7,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteProject } from "@/Redux/Project/Action";
 import { DotFilledIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const ProjectCard = () => {
+const ProjectCard = ({ item }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleDelete = (projectId) => {
+    dispatch(deleteProject({ projectId: item.id }));
+  };
   return (
     <Card className="p-5 w-full lg:max-w-3xl">
       <div className="space-y-5">
@@ -22,10 +28,10 @@ const ProjectCard = () => {
                 onClick={() => navigate("/project/1")}
                 className="cursor-pointer font-bold text-lg"
               >
-                Day Project Management System
+                {item.name}
               </h1>
               <DotFilledIcon />
-              <p className="text-sm text-gray-400">풀스텍</p>
+              <p className="text-sm text-gray-400">{item.category}</p>
             </div>
             <div>
               <DropdownMenu>
@@ -36,17 +42,19 @@ const ProjectCard = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem>수정</DropdownMenuItem>
-                  <DropdownMenuItem>삭제</DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleDelete}>
+                    삭제
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
           </div>
-          <p className="text-gray-500 text-sm">프로젝트 관리 시스템</p>
+          <p className="text-gray-500 text-sm">{item.description}</p>
         </div>
         <div className="flex flex-wrap gap-2 items-center">
-          {[1, 1, 1, 1].map((item) => (
-            <Badge key={item} variant="outline">
-              {"frontend"}
+          {item.tags.map((tag) => (
+            <Badge key={tag} variant="outline">
+              {tag}
             </Badge>
           ))}
         </div>
