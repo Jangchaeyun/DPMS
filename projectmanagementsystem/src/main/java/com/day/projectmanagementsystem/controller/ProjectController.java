@@ -83,11 +83,11 @@ public class ProjectController {
 
     @GetMapping("/search")
     public ResponseEntity<List<Project>> searchProjects(
-            @RequestParam(required = false) String keword,
+            @RequestParam(required = false) String keyword,
             @RequestHeader("Authorization") String jwt
     ) throws Exception {
         User user = userService.findUserProfileByJwt(jwt);
-        List<Project> projects = projectService.searchProject(keword, user);
+        List<Project> projects = projectService.searchProject(keyword, user);
         MessageResponse res = new MessageResponse("project deleted successfully");
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 const ProjectCard = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleDelete = (projectId) => {
+  const handleDelete = () => {
     dispatch(deleteProject({ projectId: item.id }));
   };
   return (

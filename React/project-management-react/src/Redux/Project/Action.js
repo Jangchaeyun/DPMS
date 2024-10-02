@@ -27,7 +27,7 @@ export const fetchProjects =
       console.log("all projects", data);
       dispatch({ type: FETCH_PROJECTS_SUCCESS, projects: data });
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
   };
 
