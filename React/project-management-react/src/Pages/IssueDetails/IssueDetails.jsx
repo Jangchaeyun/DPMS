@@ -12,13 +12,22 @@ import {
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchIssueById } from "@/Redux/Issue/Action";
 
 const IssueDetails = () => {
   const { projectId, issueId } = useParams();
+  const dispatch = useDispatch();
+  const { issue } = useSelector((store) => store);
 
   const handleUpdateIssueStatus = (status) => {
     console.log(status);
   };
+
+  useEffect(() => {
+    dispatch(fetchIssueById(issueId));
+  }, [issueId]);
 
   return (
     <div className="px-20 py-8 text-gray-600">
@@ -26,7 +35,7 @@ const IssueDetails = () => {
         <ScrollArea className="h-[80vh] w-[60%]">
           <div>
             <h1 className="text-lg font-semibold text-gray-600">
-              Create Navbar
+              {issue.issueDetails.title}
             </h1>
             <div className="py-5">
               <h2 className="font-semibold text-gray-600">설명</h2>

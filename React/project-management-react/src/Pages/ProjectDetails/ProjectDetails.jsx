@@ -13,9 +13,21 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import InviteUserForm from "./InviteUserForm";
 import IssueList from "./IssueList";
 import ChatBox from "./ChatBox";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchProjectById } from "@/Redux/Project/Action";
 
 const ProjectDetails = () => {
+  const { id } = useParams();
+  const { project } = useSelector((store) => store);
+  const dispatch = useDispatch();
+
   const handleProjectInvitation = () => {};
+
+  useEffect(() => {
+    dispatch(fetchProjectById(id));
+  }, [id]);
   return (
     <>
       <div className="mt-5 lg:px-10">
@@ -23,22 +35,22 @@ const ProjectDetails = () => {
           <ScrollArea className="h-screen lg:w-[69%] pr-2">
             <div className="text-gray-800 pb-10 w-full">
               <h1 className="text-lg font-semibold pb-5">
-                Day Project Management System
+                {project.projectDetails?.name}
               </h1>
               <div className="space-y-5 pb-10 text-sm">
                 <p className="w-full md:max-w-lg lg:max-w-xl">
-                  Day Project Management System
+                  {project.projectDetails?.description}
                 </p>
                 <div className="flex">
                   <p className="w-36">프로젝트 리더 :</p>
-                  <p>Band Aid</p>
+                  <p>{project.projectDetails?.owner.fullName}</p>
                 </div>
                 <div className="flex">
                   <p className="w-36">멤버 :</p>
                   <div className="flex items-center gap-2">
-                    {[1, 1, 1, 1].map((item) => (
+                    {project.projectDetails?.team.map((item) => (
                       <Avatar className="cursor-pointer" key={item}>
-                        <AvatarFallback>B</AvatarFallback>
+                        <AvatarFallback>{item.fullName[0]}</AvatarFallback>
                       </Avatar>
                     ))}
                   </div>
@@ -64,11 +76,11 @@ const ProjectDetails = () => {
                 </div>
                 <div className="flex">
                   <p className="w-36">카테고리 :</p>
-                  <p>풀스텍</p>
+                  <p>{project.projectDetails?.category}</p>
                 </div>
                 <div className="flex">
                   <p className="w-36">프로젝트 리더 :</p>
-                  <Badge>Band Aid</Badge>
+                  <Badge>{project.projectDetails?.owner.fullName}</Badge>
                 </div>
               </div>
               <section>

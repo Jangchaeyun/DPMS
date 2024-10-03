@@ -10,18 +10,25 @@ import {
 import { DotsVerticalIcon, PersonIcon } from "@radix-ui/react-icons";
 import UserList from "./UserList";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteIssue } from "@/Redux/Issue/Action";
 
-const IssueCard = () => {
+const IssueCard = ({ item, projectId }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteIssue(item.id));
+  };
   return (
     <Card className="rounded-md py-1 pb-2">
       <CardHeader className="py-0 pb-1">
         <div className="flex justify-between items-center">
           <CardTitle
             className="cursor-pointer"
-            onClick={() => navigate("/project/1/issue/1")}
+            onClick={() => navigate(`/project/${projectId}/issue/${item.id}`)}
           >
-            Create NavBar
+            {item.title}
           </CardTitle>
           <DropdownMenu>
             <DropdownMenuTrigger>
@@ -33,14 +40,14 @@ const IssueCard = () => {
               <DropdownMenuItem>진행 중</DropdownMenuItem>
               <DropdownMenuItem>완료</DropdownMenuItem>
               <DropdownMenuItem>수정</DropdownMenuItem>
-              <DropdownMenuItem>삭제</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleDelete}>삭제</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </CardHeader>
       <CardContent className="py-0">
         <div className="flex items-center justify-between">
-          <p>FBP - {1}</p>
+          <p>{item.description}</p>
           <DropdownMenu className="w-[30rem] border border-red-400">
             <DropdownMenuTrigger>
               <Button

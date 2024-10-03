@@ -7,14 +7,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { deleteProject } from "@/Redux/Project/Action";
+import { deleteProject, fetchProjectById } from "@/Redux/Project/Action";
 import { DotFilledIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProjectCard = ({ item }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(deleteProject({ projectId: item.id }));
   };
@@ -25,7 +25,7 @@ const ProjectCard = ({ item }) => {
           <div className="flex justify-between">
             <div className="flex items-center gap-5">
               <h1
-                onClick={() => navigate("/project/1")}
+                onClick={() => navigate("/project/" + item.id)}
                 className="cursor-pointer font-bold text-lg"
               >
                 {item.name}
