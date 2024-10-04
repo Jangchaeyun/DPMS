@@ -43,7 +43,7 @@ export const login = (userData) => async (dispatch) => {
 export const getUser = () => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   try {
-    const { data } = await axios.get(`${API_BASE_URL}/api/users/profile`, {
+    const { data } = await axios.get(`${API_BASE_URL}/auth/users/profile`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },

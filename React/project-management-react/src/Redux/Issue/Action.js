@@ -18,7 +18,7 @@ import {
   UPDATE_ISSUE_STATUS_FAILURE,
   UPDATE_ISSUE_STATUS_REQUEST,
   UPDATE_ISSUE_STATUS_SUCCESS,
-} from "./ActionTypes";
+} from "./ActionType";
 
 export const createIssue = (issueData) => async (dispatch) => {
   dispatch({ type: CREATE_ISSUE_REQUEST });
@@ -36,11 +36,16 @@ export const createIssue = (issueData) => async (dispatch) => {
 
 export const fetchIssues = (id) => {
   return async (dispatch) => {
-    dispatch({ type: FETCH_ISSUES_REQUEST });
+    dispatch({
+      type: FETCH_ISSUES_REQUEST,
+    });
     try {
       const response = await api.get(`/api/issues/project/${id}`);
-      console.log("fetch issues", response.data);
-      dispatch({ type: FETCH_ISSUES_SUCCESS, issues: response.data });
+      console.log("fetch issues ", response.data);
+      dispatch({
+        type: FETCH_ISSUES_SUCCESS,
+        issues: response.data,
+      });
     } catch (error) {
       dispatch({
         type: FETCH_ISSUES_FAILURE,
@@ -71,11 +76,16 @@ export const fetchIssueById = (id) => {
 
 export const updateIssueStatus = ({ id, status }) => {
   return async (dispatch) => {
-    dispatch({ type: UPDATE_ISSUE_STATUS_REQUEST });
+    dispatch({
+      type: UPDATE_ISSUE_STATUS_REQUEST,
+    });
     try {
       const response = await api.put(`/api/issues/${id}/status/${status}`);
       console.log("update issue status", response.data);
-      dispatch({ type: UPDATE_ISSUE_STATUS_SUCCESS, issues: response.data });
+      dispatch({
+        type: UPDATE_ISSUE_STATUS_SUCCESS,
+        issues: response.data,
+      });
     } catch (error) {
       dispatch({
         type: UPDATE_ISSUE_STATUS_FAILURE,

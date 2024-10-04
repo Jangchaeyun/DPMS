@@ -12,12 +12,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import React, { useEffect } from "react";
 import IssueCard from "./IssueCard";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import CreateIssueForm from "./CreateIssueForm";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { fetchIssues } from "@/Redux/Issue/Action";
 import { useParams } from "react-router-dom";
 
@@ -59,7 +59,7 @@ const IssueList = ({ title, status }) => {
         </Card>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>새로운 이슈 만들기</DialogTitle>
+            <DialogTitle>이슈 새로 만들기</DialogTitle>
           </DialogHeader>
           <CreateIssueForm status={status} />
         </DialogContent>

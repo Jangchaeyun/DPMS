@@ -1,15 +1,17 @@
-import "./App.css";
-import Home from "./Pages/Home/Home";
-import Navbar from "./Pages/Navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
-import ProjectDetails from "./Pages/ProjectDetails/ProjectDetails";
-import IssueDetails from "./Pages/IssueDetails/IssueDetails";
-import Subscription from "./Pages/Subscription/Subscription";
-import Auth from "./Pages/Auth/Auth";
+import "./App.css";
+import Home from "./pages/Home/Home";
+import Navbar from "./pages/Navbar/Navbar";
+import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
+import IssueDetails from "./pages/IssueDetails/IssueDetails";
+import Subscription from "./pages/Subscription/Subscription";
+import Auth from "./pages/Auth/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./Redux/Auth/Action";
 import { fetchProjects } from "./Redux/Project/Action";
+import UpgradeSuccess from "./pages/Subscription/UpgradeSuccess";
+import AcceptInvitation from "./pages/Project/AcceptInvitation";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +23,6 @@ function App() {
   }, [auth.jwt]);
 
   console.log(auth);
-
   return (
     <>
       {auth.user ? (
@@ -35,6 +36,8 @@ function App() {
               element={<IssueDetails />}
             />
             <Route path="/upgrade_plan" element={<Subscription />} />
+            <Route path="/upgrade_plan/success" element={<UpgradeSuccess />} />
+            <Route path="/accept_invitation" element={<AcceptInvitation />} />
           </Routes>
         </div>
       ) : (

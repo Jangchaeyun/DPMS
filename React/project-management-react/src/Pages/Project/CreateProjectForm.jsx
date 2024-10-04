@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -7,7 +5,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { tags } from "../ProjectList/ProjectList";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -15,22 +16,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { tags } from "../ProjectList/ProjectList";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import { useDispatch } from "react-redux";
+import { DialogClose } from "@/components/ui/dialog";
+import { useDispatch, useSelector } from "react-redux";
 import { createProject } from "@/Redux/Project/Action";
+import { useEffect } from "react";
+import { getUserSubscription } from "@/Redux/Subscription/Action";
 
 const CreateProjectForm = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserSubscription()); // Fetch user subscription on mount
+  }, [dispatch]);
+
   const handleTagsChange = (newValue) => {
     const currentTags = form.getValues("tags");
-
     const updatedTags = currentTags.includes(newValue)
       ? currentTags.filter((tag) => tag !== newValue)
       : [...currentTags, newValue];
-
     form.setValue("tags", updatedTags);
   };
   const form = useForm({
@@ -47,11 +51,10 @@ const CreateProjectForm = () => {
     dispatch(createProject(data));
     console.log("create project data", data);
   };
-
   return (
     <div>
       <Form {...form}>
-        <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name="name"
@@ -153,15 +156,15 @@ const CreateProjectForm = () => {
             )}
           />
           <DialogClose>
-            {false ? (
+            {planType === "FREE" && projectCount >= 3 ? (
               <div>
                 <p>
-                  무료 플랜에서는 3개의 프로젝트만 만들 수 있습니다.
-                  업그레이드를 해주세요
+                  무료 플랜으로는 3개의 프로젝트만 생성할 수 있습니다. 플랜을
+                  업그레이드하세요.
                 </p>
               </div>
             ) : (
-              <Button type="submit" className="w-full mt-5">
+              <Button type="submit" className="w-full my-5">
                 프로젝트 만들기
               </Button>
             )}

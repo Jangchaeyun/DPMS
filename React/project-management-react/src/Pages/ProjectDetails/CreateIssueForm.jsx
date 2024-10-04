@@ -15,8 +15,8 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const CreateIssueForm = ({ status }) => {
-  const { id } = useParams();
   const dispatch = useDispatch();
+  const { id } = useParams();
   const form = useForm({
     // resolver: zod
     defaultValues: {
@@ -36,13 +36,12 @@ const CreateIssueForm = ({ status }) => {
         status,
       })
     );
-    console.log("create issue data", data);
+    console.log("create issue", data);
   };
-
   return (
     <div>
       <Form {...form}>
-        <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name="issueName"
@@ -70,7 +69,7 @@ const CreateIssueForm = ({ status }) => {
                     {...field}
                     type="text"
                     className="border w-full border-gray-700 py-5 px-5"
-                    placeholder="이슈 설명..."
+                    placeholder="설명..."
                   />
                 </FormControl>
                 <FormMessage />
@@ -78,7 +77,7 @@ const CreateIssueForm = ({ status }) => {
             )}
           />
           <DialogClose>
-            <Button type="submit" className="w-full mt-5">
+            <Button type="submit" className="w-full my-5">
               이슈 만들기
             </Button>
           </DialogClose>

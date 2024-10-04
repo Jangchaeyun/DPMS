@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { DialogClose } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -9,10 +8,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createComment } from "@/Redux/Comment/Action";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 const CreateCommentForm = ({ issueId }) => {
+  const dispatch = useDispatch();
   const form = useForm({
     // resolver: zod
     defaultValues: {
@@ -21,7 +23,8 @@ const CreateCommentForm = ({ issueId }) => {
   });
 
   const onSubmit = (data) => {
-    console.log("invite email", data);
+    dispatch(createComment({ content: data.content, issueId }));
+    console.log("comment", data);
   };
   return (
     <div>
@@ -46,8 +49,8 @@ const CreateCommentForm = ({ issueId }) => {
                       placeholder="코멘트 추가..."
                     />
                   </FormControl>
+                  <FormMessage />
                 </div>
-                <FormMessage />
               </FormItem>
             )}
           />

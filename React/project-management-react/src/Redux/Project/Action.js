@@ -10,10 +10,14 @@ import {
   FETCH_PROJECT_BY_ID_SUCCESS,
   FETCH_PROJECTS_REQUEST,
   FETCH_PROJECTS_SUCCESS,
+  INVITE_TO_PROJECT_FAILURE,
   INVITE_TO_PROJECT_REQUEST,
   INVITE_TO_PROJECT_SUCCESS,
-  SEARCH_PROJECT_REQUEST,
+  SEARCH_PROJECT_FAILURE,
   SEARCH_PROJECT_SUCCESS,
+  UPDATE_PROJECT_FAILURE,
+  UPDATE_PROJECT_REQUEST,
+  UPDATE_PROJECT_SUCCESS,
 } from "./ActionTypes";
 
 export const fetchProjects =
@@ -32,13 +36,13 @@ export const fetchProjects =
   };
 
 export const searchProjects = (keyword) => async (dispatch) => {
-  dispatch({ type: SEARCH_PROJECT_REQUEST });
+  dispatch({ type: SEARCH_PROJECT_FAILURE });
   try {
     const { data } = await api.get("/api/projects/search?keyword=" + keyword);
     console.log("search projects", data);
     dispatch({ type: SEARCH_PROJECT_SUCCESS, projects: data });
   } catch (error) {
-    console.log(error);
+    console.log("error", error);
   }
 };
 
@@ -46,10 +50,10 @@ export const createProject = (projectData) => async (dispatch) => {
   dispatch({ type: CREATE_PROJECT_REQUEST });
   try {
     const { data } = await api.post("/api/projects", projectData);
-    console.log("create projects ----- ", data);
+    console.log("create projects", data);
     dispatch({ type: CREATE_PROJECT_SUCCESS, projects: data });
   } catch (error) {
-    console.log(error);
+    console.log("error", error);
   }
 };
 
@@ -60,7 +64,7 @@ export const fetchProjectById = (id) => async (dispatch) => {
     console.log("project", data);
     dispatch({ type: FETCH_PROJECT_BY_ID_SUCCESS, project: data });
   } catch (error) {
-    console.log(error);
+    console.log("error", error);
   }
 };
 
@@ -73,7 +77,7 @@ export const deleteProject =
       console.log("delete project", data);
       dispatch({ type: DELETE_PROJECT_SUCCESS, projectId });
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
   };
 
@@ -86,27 +90,40 @@ export const inviteToProject =
         email,
         projectId,
       });
-      console.log("invite project", data);
       dispatch({ type: INVITE_TO_PROJECT_SUCCESS, payload: data });
+      console.log("invite project", data);
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
+      dispatch({ type: INVITE_TO_PROJECT_FAILURE, error });
     }
   };
 
 export const acceptInvitation =
-  ({ invitationToken, navigate }) =>
+  ({ token, navigate }) =>
   async (dispatch) => {
     dispatch({ type: ACCEPT_INVITATION_REQUEST });
     try {
       const { data } = await api.get("/api/projects/accept_invitation", {
         params: {
-          token: invitationToken,
+          token,
         },
       });
-      navigate("/project/" + data.projectId);
-      console.log("accept invitation", data);
       dispatch({ type: ACCEPT_INVITATION_SUCCESS, payload: data });
+      console.log("accept invitation", data);
+      navigate("/project/" + data.projectId);
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
     }
   };
+
+export const updateProject = (projectId, projectData) => async (dispatch) => {
+  dispatch({ type: UPDATE_PROJECT_REQUEST });
+  try {
+    const { data } = await api.put(`/api/projects/${projectId}`, projectData);
+    console.log("update project", data);
+    dispatch({ type: UPDATE_PROJECT_SUCCESS, project: data });
+  } catch (error) {
+    console.log("error", error);
+    dispatch({ type: UPDATE_PROJECT_FAILURE, error });
+  }
+};

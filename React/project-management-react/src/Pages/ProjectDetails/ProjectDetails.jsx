@@ -10,21 +10,19 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlusIcon } from "@radix-ui/react-icons";
+import React, { useEffect } from "react";
 import InviteUserForm from "./InviteUserForm";
 import IssueList from "./IssueList";
 import ChatBox from "./ChatBox";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { fetchProjectById } from "@/Redux/Project/Action";
+import { useParams } from "react-router-dom";
 
 const ProjectDetails = () => {
-  const { id } = useParams();
-  const { project } = useSelector((store) => store);
-  const dispatch = useDispatch();
-
   const handleProjectInvitation = () => {};
-
+  const dispatch = useDispatch();
+  const { project } = useSelector((store) => store);
+  const { id } = useParams();
   useEffect(() => {
     dispatch(fetchProjectById(id));
   }, [id]);
@@ -33,20 +31,20 @@ const ProjectDetails = () => {
       <div className="mt-5 lg:px-10">
         <div className="lg:flex gap-5 justify-between pb-4">
           <ScrollArea className="h-screen lg:w-[69%] pr-2">
-            <div className="text-gray-800 pb-10 w-full">
+            <div className="text-gray-400 pb-10 w-full">
               <h1 className="text-lg font-semibold pb-5">
                 {project.projectDetails?.name}
               </h1>
               <div className="space-y-5 pb-10 text-sm">
-                <p className="w-full md:max-w-lg lg:max-w-xl">
+                <p className="w-full md:max-w-lg lg:max-w-xl text-sm">
                   {project.projectDetails?.description}
                 </p>
                 <div className="flex">
-                  <p className="w-36">프로젝트 리더 :</p>
+                  <p className="w-36">프로젝트 리더 : </p>
                   <p>{project.projectDetails?.owner.fullName}</p>
                 </div>
                 <div className="flex">
-                  <p className="w-36">멤버 :</p>
+                  <p className="w-36">멤버 : </p>
                   <div className="flex items-center gap-2">
                     {project.projectDetails?.team.map((item) => (
                       <Avatar className="cursor-pointer" key={item}>
@@ -69,24 +67,20 @@ const ProjectDetails = () => {
                       </DialogClose>
                     </DialogTrigger>
                     <DialogContent>
-                      <DialogHeader>사용자 초대</DialogHeader>
+                      <DialogHeader>초대할 사용자</DialogHeader>
                       <InviteUserForm />
                     </DialogContent>
                   </Dialog>
                 </div>
                 <div className="flex">
-                  <p className="w-36">카테고리 :</p>
+                  <p className="w-36">카테고리 : </p>
                   <p>{project.projectDetails?.category}</p>
-                </div>
-                <div className="flex">
-                  <p className="w-36">프로젝트 리더 :</p>
-                  <Badge>{project.projectDetails?.owner.fullName}</Badge>
                 </div>
               </div>
               <section>
-                <p className="py-5 border-b text-lg -tracking-wider">할 일</p>
+                <p className="py-5 border-b text-lg tracking-wider">Tasks</p>
                 <div className="lg:flex md:flex gap-3 justify-between py-5">
-                  <IssueList status="pending" title="할 일 리스트" />
+                  <IssueList status="pending" title="할 일 목록" />
                   <IssueList status="in_progress" title="진행 중" />
                   <IssueList status="done" title="완료" />
                 </div>

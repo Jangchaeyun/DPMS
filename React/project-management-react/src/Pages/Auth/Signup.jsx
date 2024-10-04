@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { register } from "@/Redux/Auth/Action";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
@@ -15,7 +16,7 @@ const Signup = () => {
   const dispatch = useDispatch();
 
   const form = useForm({
-    // resolver: zod
+    //resolver:zod
     defaultValues: {
       email: "",
       password: "",
@@ -25,14 +26,30 @@ const Signup = () => {
 
   const onSubmit = (data) => {
     dispatch(register(data));
-    console.log("register", data);
+    console.log("register user", data);
   };
-
   return (
     <div className="space-y-5">
       <h1>회원가입</h1>
       <Form {...form}>
-        <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="fullName"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    {...field}
+                    type="text"
+                    className="border w-full border-gray-700 py-5 px-5"
+                    placeholder="사용자 이름..."
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="email"
@@ -67,24 +84,7 @@ const Signup = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="fullName"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    {...field}
-                    type="text"
-                    className="border w-full border-gray-700 py-5 px-5"
-                    placeholder="이름..."
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="w-full mt-5">
+          <Button type="submit" className="w-full my-5">
             회원가입
           </Button>
         </form>

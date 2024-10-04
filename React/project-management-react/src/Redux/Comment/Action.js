@@ -4,11 +4,12 @@ import {
   CREATE_COMMENT_REQUEST,
   CREATE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAILURE,
+  DELETE_COMMENT_REQUEST,
   DELETE_COMMENT_SUCCESS,
   FETCH_COMMENTS_FAILURE,
   FETCH_COMMENTS_REQUEST,
   FETCH_COMMENTS_SUCCESS,
-} from "./ActionTypes";
+} from "./ActionType";
 
 export const createComment = (commentData) => {
   return async (dispatch) => {
@@ -24,7 +25,7 @@ export const createComment = (commentData) => {
       console.log("error ", error);
       dispatch({
         type: CREATE_COMMENT_FAILURE,
-        eror: error.messages,
+        error: error.message,
       });
     }
   };
@@ -32,12 +33,10 @@ export const createComment = (commentData) => {
 
 export const deleteComment = (commentId) => {
   return async (dispatch) => {
+    dispatch({ type: DELETE_COMMENT_REQUEST });
     try {
       await api.delete(`/api/comments/${commentId}`);
-      dispatch({
-        type: DELETE_COMMENT_SUCCESS,
-        commentId,
-      });
+      dispatch({ type: DELETE_COMMENT_SUCCESS, commentId });
     } catch (error) {
       console.log("error ", error);
       dispatch({

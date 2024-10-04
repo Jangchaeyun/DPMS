@@ -8,25 +8,25 @@ import {
   UPGRADE_SUBSCRIPTION_SUCCESS,
 } from "./ActionTypes";
 
-export const getUserSubscription = (jwt) => {
+export const getUserSubscription = () => {
   return async (dispatch) => {
     dispatch({ type: GET_USER_SUBSCRIPTION_REQUEST });
     try {
-      const response = await api.get("/api/subscription/user", {
+      const response = await api.get("/api/subscriptions/user", {
         headers: {
-          Authorization: `Bearer ${jwt}`,
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
       });
       dispatch({
         type: GET_USER_SUBSCRIPTION_SUCCESS,
         payload: response.data,
       });
-      console.log("users subscription", response.data);
+      console.log("users subscription ", response.data);
     } catch (error) {
       console.log(error);
       dispatch({
         type: GET_USER_SUBSCRIPTION_FAILURE,
-        payload: error.message,
+        error: error.message,
       });
     }
   };
@@ -36,7 +36,10 @@ export const upgradeSubscription = ({ planType }) => {
   return async (dispatch) => {
     dispatch({ type: UPGRADE_SUBSCRIPTION_REQUEST });
     try {
-      const response = await api.patch("/api/subscription/upgrade", null, {
+      const response = await api.patch("/api/subscriptions/upgrade", null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
         params: {
           planType: planType,
         },
@@ -45,7 +48,7 @@ export const upgradeSubscription = ({ planType }) => {
         type: UPGRADE_SUBSCRIPTION_SUCCESS,
         payload: response.data,
       });
-      console.log("upgraded subscription", response.data);
+      console.log("upgraded subsciption", response.data);
     } catch (error) {
       console.log(error.response.data);
       dispatch({

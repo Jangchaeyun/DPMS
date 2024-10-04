@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Signup from "./Signup";
+import React, { useState } from "react";
 import Login from "./Login";
+import Signup from "./Signup";
 import { Button } from "@/components/ui/button";
 import "./Auth.css";
 
@@ -12,14 +12,16 @@ const Auth = () => {
         <div className="minContainer login">
           <div className="loginBox w-full px-10 space-y-5">
             {active ? <Signup /> : <Login />}
-          </div>
-          <div>
-            <span>
-              {active ? "이미 계정이 있으십니까?" : "계정이 없으십니까?"}
-            </span>
-            <Button variant="ghost" onClick={() => setActive(!active)}>
-              {active ? "로그인" : "회원가입"}
-            </Button>
+            <div>
+              {active ? (
+                <span>이미 계정이 있으십니까?</span>
+              ) : (
+                <span>이미 계정이 없으십니까?</span>
+              )}
+              <Button variant="ghost" onClick={() => setActive(!active)}>
+                {active ? "로그인" : "회원가입"}
+              </Button>
+            </div>
           </div>
         </div>
       </div>

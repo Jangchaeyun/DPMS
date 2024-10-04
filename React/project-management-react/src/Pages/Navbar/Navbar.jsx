@@ -26,10 +26,10 @@ const Navbar = () => {
     dispatch(logout());
   };
   return (
-    <div className="border-b py-4 px-5 flex items-center justify-between">
+    <div className="border-b py-4 px-4 flex items-center justify-between">
       <div className="flex items-center gap-3">
         <p onClick={() => navigate("/")} className="cursor-pointer">
-          Day Project Management System
+          Day Project Managment
         </p>
         <Dialog>
           <DialogTrigger>
@@ -48,9 +48,9 @@ const Navbar = () => {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Button
-              variant="ghost"
+              variant="outline"
               size="icon"
-              className="rounded-full border-2 border-gray-200"
+              className="rounded-full border-2 border-gray-500"
             >
               <PersonIcon />
             </Button>

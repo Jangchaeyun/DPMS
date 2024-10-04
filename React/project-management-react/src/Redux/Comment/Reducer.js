@@ -1,14 +1,14 @@
 import {
-  CREATE_COMMENT_REQUEST,
-  DELETE_COMMENT_REQUEST,
-  FETCH_COMMENTS_REQUEST,
-  CREATE_COMMENT_SUCCESS,
-  DELETE_COMMENT_SUCCESS,
-  FETCH_COMMENTS_SUCCESS,
   CREATE_COMMENT_FAILURE,
+  CREATE_COMMENT_REQUEST,
+  CREATE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAILURE,
+  DELETE_COMMENT_REQUEST,
+  DELETE_COMMENT_SUCCESS,
   FETCH_COMMENTS_FAILURE,
-} from "./ActionTypes";
+  FETCH_COMMENTS_REQUEST,
+  FETCH_COMMENTS_SUCCESS,
+} from "./ActionType";
 
 const initialState = {
   comments: [],
@@ -16,7 +16,7 @@ const initialState = {
   error: null,
 };
 
-const commentReducer = (state = initialState, action) => {
+export const commentReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_COMMENT_REQUEST:
     case DELETE_COMMENT_REQUEST:
@@ -29,7 +29,7 @@ const commentReducer = (state = initialState, action) => {
     case CREATE_COMMENT_SUCCESS:
       return {
         ...state,
-        loading: false,
+        loadingL: false,
         comments: [...state.comments, action.comment],
       };
     case DELETE_COMMENT_SUCCESS:
@@ -58,5 +58,3 @@ const commentReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default commentReducer;

@@ -1,10 +1,10 @@
 import {
-  GET_USER_SUBSCRIPTION_REQUEST,
   UPGRADE_SUBSCRIPTION_REQUEST,
-  GET_USER_SUBSCRIPTION_SUCCESS,
   UPGRADE_SUBSCRIPTION_SUCCESS,
-  GET_USER_SUBSCRIPTION_FAILURE,
   UPGRADE_SUBSCRIPTION_FAILURE,
+  GET_USER_SUBSCRIPTION_REQUEST,
+  GET_USER_SUBSCRIPTION_SUCCESS,
+  GET_USER_SUBSCRIPTION_FAILURE,
 } from "./ActionTypes";
 
 const initialState = {
@@ -12,8 +12,7 @@ const initialState = {
   loading: false,
   error: null,
 };
-
-const subscriptionReducer = (state = initialState, action) => {
+export const subscriptionReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_SUBSCRIPTION_REQUEST:
     case UPGRADE_SUBSCRIPTION_REQUEST:
@@ -43,10 +42,7 @@ const subscriptionReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-
     default:
       return state;
   }
 };
-
-export default subscriptionReducer;

@@ -8,25 +8,29 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import { inviteToProject } from "@/Redux/Project/Action";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const InviteUserForm = () => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
   const form = useForm({
-    // resolver: zod
+    //resolver:zod
     defaultValues: {
       email: "",
     },
   });
 
   const onSubmit = (data) => {
-    console.log("invite email", data);
+    dispatch(inviteToProject({ email: data.email, projectId: id }));
+    console.log("invite user", data);
   };
-
   return (
     <div>
       <Form {...form}>
-        <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name="email"
@@ -37,7 +41,7 @@ const InviteUserForm = () => {
                     {...field}
                     type="text"
                     className="border w-full border-gray-700 py-5 px-5"
-                    placeholder="팀원 이메일..."
+                    placeholder="사용자 이메일..."
                   />
                 </FormControl>
                 <FormMessage />
@@ -45,8 +49,8 @@ const InviteUserForm = () => {
             )}
           />
           <DialogClose>
-            <Button type="submit" className="w-full mt-5">
-              팀원 초대
+            <Button type="submit" className="w-full my-5">
+              사용자 초대
             </Button>
           </DialogClose>
         </form>

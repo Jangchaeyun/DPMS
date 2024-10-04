@@ -14,7 +14,7 @@ import {
   CREATE_ISSUE_FAILURE,
   DELETE_ISSUE_FAILURE,
   ASSIGNED_ISSUE_TO_USER_FAILURE,
-} from "./ActionTypes";
+} from "./ActionType";
 
 const initialState = {
   issues: [],

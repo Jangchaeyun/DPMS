@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DotsVerticalIcon, PersonIcon } from "@radix-ui/react-icons";
+import React from "react";
 import UserList from "./UserList";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -17,7 +18,7 @@ const IssueCard = ({ item, projectId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
+  const handleIssueDelete = () => {
     dispatch(deleteIssue(item.id));
   };
   return (
@@ -36,11 +37,11 @@ const IssueCard = ({ item, projectId }) => {
                 <DotsVerticalIcon />
               </Button>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent>
-              <DropdownMenuItem>진행 중</DropdownMenuItem>
-              <DropdownMenuItem>완료</DropdownMenuItem>
-              <DropdownMenuItem>수정</DropdownMenuItem>
-              <DropdownMenuItem onClick={handleDelete}>삭제</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleIssueDelete}>
+                삭제
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -52,7 +53,7 @@ const IssueCard = ({ item, projectId }) => {
             <DropdownMenuTrigger>
               <Button
                 size="icon"
-                className="bg-gray-900 hover:text-black text-red-400 rounded-full"
+                className="bg-gray-900 hover:text-black text-white rounded-full"
               >
                 <Avatar>
                   <AvatarFallback>
@@ -62,7 +63,7 @@ const IssueCard = ({ item, projectId }) => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <UserList />
+              <UserList issueDetails={item} />
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

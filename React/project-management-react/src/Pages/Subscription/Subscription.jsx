@@ -1,5 +1,6 @@
+import React from "react";
 import SubscriptionCard from "./SubscriptionCard";
-
+import { useSelector } from "react-redux";
 const paidPlan = [
   "무제한 프로젝트 추가",
   "라이브 채팅에 대한 액세스",
@@ -33,6 +34,7 @@ const freePlan = [
 ];
 
 const Subscription = () => {
+  const { subscription } = useSelector((store) => store);
   return (
     <div className="p-10">
       <h1 className="text-5xl font-semibold py-5 pb-16 text-center">가격</h1>
@@ -43,16 +45,22 @@ const Subscription = () => {
             fetures: freePlan,
             planType: "FREE",
             price: 0,
-            buttonName: true ? "현재 플랜" : "플랜 시작하기",
+            buttonName:
+              subscription.userSubscription?.planType == "FREE"
+                ? "현재 플랜"
+                : "시작하기",
           }}
         />
         <SubscriptionCard
           data={{
-            planName: "한달 플랜",
+            planName: "월별 플랜",
             fetures: paidPlan,
             planType: "MONTHLY",
             price: 12923,
-            buttonName: true ? "현재 플랜" : "플랜 시작하기",
+            buttonName:
+              subscription.userSubscription?.planType == "MONTHLY"
+                ? "현재 플랜"
+                : "시작하기",
           }}
         />
         <SubscriptionCard
@@ -61,7 +69,10 @@ const Subscription = () => {
             fetures: annualPlan,
             planType: "ANNUALLY",
             price: 108553,
-            buttonName: true ? "현재 플랜" : "플랜 시작하기",
+            buttonName:
+              subscription.userSubscription?.planType == "ANNUALLY"
+                ? "현재 플랜"
+                : "시작하기",
           }}
         />
       </div>

@@ -2,22 +2,23 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
-  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { deleteProject, fetchProjectById } from "@/Redux/Project/Action";
+import { deleteProject } from "@/Redux/Project/Action";
+import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
 import { DotFilledIcon, DotsVerticalIcon } from "@radix-ui/react-icons";
-import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProjectCard = ({ item }) => {
-  const navigate = useNavigate();
+  const naviate = useNavigate();
+  const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(deleteProject({ projectId: item.id }));
   };
+
   return (
     <Card className="p-5 w-full lg:max-w-3xl">
       <div className="space-y-5">
@@ -25,7 +26,7 @@ const ProjectCard = ({ item }) => {
           <div className="flex justify-between">
             <div className="flex items-center gap-5">
               <h1
-                onClick={() => navigate("/project/" + item.id)}
+                onClick={() => naviate("/project/" + item.id)}
                 className="cursor-pointer font-bold text-lg"
               >
                 {item.name}
@@ -41,7 +42,6 @@ const ProjectCard = ({ item }) => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem>수정</DropdownMenuItem>
                   <DropdownMenuItem onClick={handleDelete}>
                     삭제
                   </DropdownMenuItem>
@@ -53,7 +53,7 @@ const ProjectCard = ({ item }) => {
         </div>
         <div className="flex flex-wrap gap-2 items-center">
           {item.tags.map((tag) => (
-            <Badge key={tag} variant="outline">
+            <Badge key={item} variant="outline">
               {tag}
             </Badge>
           ))}
