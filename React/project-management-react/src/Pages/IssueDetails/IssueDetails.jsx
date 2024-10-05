@@ -60,7 +60,7 @@ const IssueDetails = () => {
                   <CreateCommentForm issueId={issueId} />
                   <div className="mt-8 space-y-6">
                     {comment.comments.map((item) => (
-                      <CommentCard item={item} key={item} />
+                      <CommentCard item={item} key={item.id} />
                     ))}
                   </div>
                 </TabsContent>
