@@ -20,16 +20,17 @@ import { Cross1Icon } from "@radix-ui/react-icons";
 import { DialogClose } from "@/components/ui/dialog";
 import { useDispatch, useSelector } from "react-redux";
 import { createProject } from "@/Redux/Project/Action";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getUserSubscription } from "@/Redux/Subscription/Action";
 
 const CreateProjectForm = () => {
   const dispatch = useDispatch();
 
   const { subscription } = useSelector((store) => store);
+
   useEffect(() => {
     dispatch(getUserSubscription());
-  }, []);
+  }, [dispatch]);
 
   const handleTagsChange = (newValue) => {
     const currentTags = form.getValues("tags");
@@ -158,8 +159,8 @@ const CreateProjectForm = () => {
             )}
           />
           <DialogClose>
-            {subscription.userSubscription.planType === "FREE" &&
-            subscription.userSubscription.user.projectSize >= 3 ? (
+            {subscription.userSubscription?.planType === "FREE" &&
+            subscription.userSubscription?.user.projectSize >= 3 ? (
               <div>
                 <p>
                   무료 플랜으로는 3개의 프로젝트만 생성할 수 있습니다. 플랜을

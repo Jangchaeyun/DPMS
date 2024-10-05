@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { createComment } from "@/Redux/Comment/Action";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateCommentForm = ({ issueId }) => {
   const dispatch = useDispatch();
@@ -36,11 +36,6 @@ const CreateCommentForm = ({ issueId }) => {
             render={({ field }) => (
               <FormItem>
                 <div className="flex gap-2">
-                  <div>
-                    <Avatar>
-                      <AvatarFallback>B</AvatarFallback>
-                    </Avatar>
-                  </div>
                   <FormControl>
                     <Input
                       {...field}

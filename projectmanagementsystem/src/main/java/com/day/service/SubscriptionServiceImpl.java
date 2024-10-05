@@ -34,6 +34,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public Subscription getUsersSubscription(Long userId) {
         Subscription subscription = subscriptionRepository.findByUserId(userId);
+
         if (!isValid(subscription)) {
             subscription.setPlanType(PlanType.FREE);
             subscription.setSubscriptionEndDate(LocalDate.now().plusMonths(12));

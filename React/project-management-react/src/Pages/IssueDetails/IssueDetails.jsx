@@ -111,16 +111,7 @@ const IssueDetails = () => {
                 </div>
                 <div className="flex gap-10 items-center">
                   <p className="w-[7rem]">릴리즈</p>
-                  <p>24-09-07</p>
-                </div>
-                <div className="flex gap-10 items-center">
-                  <p className="w-[7rem]">보고자</p>
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-8 w-8 text-xs">
-                      <AvatarFallback>D</AvatarFallback>
-                    </Avatar>
-                    <p>Day Band</p>
-                  </div>
+                  <p>24-10-05</p>
                 </div>
               </div>
             </div>
